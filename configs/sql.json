@@ -1,0 +1,120 @@
+{
+  "sqls": [
+    {
+      "id": "BB_Instrument_by_id",
+      "sql": [
+        "select * from [dbo].[BB_Instrument]",
+        "where id=?"
+      ]
+    },
+    {
+      "id": "AdsorptionDryer_Conclusion_sel_all",
+      "sql": [
+        "select * from [dbo].[AP_AdsorptionDryer_Conclusion]",
+        "order by id"
+      ]
+    },
+    {
+      "id": "AdsorptionDryer_Conclusion_sel_by_id",
+      "sql": [
+        "select * from [dbo].[AP_AdsorptionDryer_Conclusion]",
+        "where id=?"
+      ]
+    },
+    {
+      "id": "AdsorptionDryer_Conclusion_update_DewPoint",
+      "sql": [
+        "update [dbo].[AP_AdsorptionDryer_Conclusion] set",
+        "DewPoint=?,",
+        "[DateTime]=getdate()",
+        "where [Id]=?"
+      ]
+    },
+    {
+      "id": "AdsorptionDryer_Conclusion_update_ATower",
+      "sql": [
+        "update [dbo].[AP_AdsorptionDryer_Conclusion] set",
+        "ATower_DewLevel=?,",
+        "ATower_HeatReduce=?,",
+        "ATower_DewPoint=?,",
+        "[DateTime]=getdate()",
+        "where [Id]=?"
+      ]
+    },
+    {
+      "id": "AdsorptionDryer_Conclusion_update_BTower",
+      "sql": [
+        "update [dbo].[AP_AdsorptionDryer_Conclusion] set",
+        "BTower_DewLevel=?,",
+        "BTower_HeatReduce=?,",
+        "BTower_DewPoint=?,",
+        "[DateTime]=getdate()",
+        "where [Id]=?"
+      ]
+    },
+    {
+      "id": "AdsorptionDryer_Conclusion_update_Control",
+      "sql": [
+        "update [dbo].[AP_AdsorptionDryer_Conclusion] set",
+        "Heater_Control=?,",
+        "Regeneration_Control=?,",
+        "[DateTime]=getdate()",
+        "where [Id]=?"
+      ]
+    },
+    {
+      "id": "Dryer_Real_latest",
+      "sql": [
+        "select top 1 * from  [dbo].[AP_AdsorptionDryer_Real]",
+        "where EquipID=? and StationID=?",
+        "order by id desc"
+      ]
+    },
+    {
+      "id": "Station_Real_latest",
+      "sql": [
+        "select top 1 * from [dbo].[AP_Station_Real]",
+        "where StationID=?",
+        "order by id desc"
+      ]
+    },
+    {
+      "id": "OPC_DryerSend_insert",
+      "sql": [
+        "INSERT INTO [dbo].[OPC_DryerSend](",
+        "[DateTime],[DayID],[FactoryID],[StationID],[EquipID],",
+        "[DewPoint_Control],[Heater_Control],[Regeneration_Control],[IsSend])",
+        "OUTPUT INSERTED.Id",
+        "VALUES(getdate(),'D0',?,?,?,NULL,?,?,'0')"
+      ]
+    },
+    {
+      "id": "OPC_DryerSend_sel_by_id",
+      "sql": [
+        "select * from [dbo].[OPC_DryerSend]",
+        "where id=?"
+      ]
+    },
+    {
+      "id": "Threshold_by_id",
+      "sql": [
+         "select [CurrentValue] from [dbo].[BB_Threshold]",
+         "where id=?"
+      ]
+    },
+    {
+      "id": "Threshold_by_name",
+      "sql": [
+         "select top 1 [CurrentValue] from [dbo].[BB_Threshold]",
+         "where [name] like ?"
+      ]
+    },
+    {
+      "id": "PressConclusion_last",
+      "sql": [
+        "select top 1 * FROM [dbo].[AP_PressDesign_Conclusion]",
+        "order by id desc"
+      ]
+    }
+  ]
+}

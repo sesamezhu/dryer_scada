@@ -1,0 +1,295 @@
+{
+    "grid": {
+        "titlename": "HAL远程挂罐智能辅助系统",
+        "info1-visible": true,
+        "sample-weight": true,
+        "visualize": false,
+        "angle-line": true,
+        "boxes-line": true,
+        "gpu-mode": 2
+    },
+    "videos": [
+        {
+            "id": 2,
+            "station_id": 1,
+            "url1":"d:/share/202111251159.mp4",
+            "url": "rtsp://admin:ak123456@192.168.13.11:554/Streaming/Channels/1",
+            "gpu": true,
+            "rcnn": true,
+            "title": "1#倒罐左",
+            "slow": 0,
+            "sequence": 0,
+            "skip-frames" : 0,
+            "sample-enable": false,
+            "sample-limit": 6,
+            "safety-enable": true,
+            "distance": true,
+            "distance-min": 0.4,
+            "distance-max": 2,
+            "angle": false,
+            "angle-min": 70,
+            "angle-max": 150,
+            "angle2": false,
+            "angle2-a-min": 70,
+            "angle2-a-max": 150,
+            "angle2-b-min": 90,
+            "angle2-b-max": 270,
+            "height-map": [
+                {
+                    "key": 0,
+                    "value": 2000
+                },
+                {
+                    "key": 100,
+                    "value": 1000
+                },
+                {
+                    "key": 244,
+                    "value": 0
+                },
+                {
+                    "key": 299,
+                    "value": -2000
+                },
+                {
+                    "key": 360,
+                    "value": -7000
+                }
+            ],
+            "width-map": [
+                {
+                    "key": 0,
+                    "value": -3122
+                },
+                {
+                    "key": 323,
+                    "value": 0
+                },
+                {
+                    "key": 640,
+                    "value": 3064
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "station_id": 1,
+            "url2": "d:/share/c.mp4",
+            "url": "rtsp://admin:ak123456@192.168.13.10:554/Streaming/Channels/1",
+            "url1": "C:/Users/zhugh/Pictures/ping1.mp4",
+            "gpu": true,
+            "rcnn": true,
+            "title": "1#倒罐右",
+            "slow": 0,
+            "merge-len": 0,
+            "skip-frames" : 0,
+            "sample-enable": false,
+            "sample-weight": false,
+            "sample-limit": 6,
+            "safety-enable": true,
+            "distance": true,
+            "distance-min": 0.4,
+            "distance-max": 2,
+            "angle": false,
+            "angle-min": 70,
+            "angle-max": 150,
+            "angle2": false,
+            "angle2-a-min": 70,
+            "angle2-a-max": 150,
+            "angle2-b-min": 90,
+            "angle2-b-max": 270,
+            "height-map": [
+                {
+                    "key": 0,
+                    "value": 2000
+                },
+                {
+                    "key": 100,
+                    "value": 1000
+                },
+                {
+                    "key": 260,
+                    "value": 0
+                },
+                {
+                    "key": 299,
+                    "value": -2000
+                },
+                {
+                    "key": 360,
+                    "value": -7000
+                }
+            ],
+            "width-map": [
+                {
+                    "key": 0,
+                    "value": -2752
+                },
+                {
+                    "key": 276,
+                    "value": 0
+                },
+                {
+                    "key": 640,
+                    "value": 3630
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "station_id": 2,
+            "url1":"d:/share/202111251159.mp4",
+            "url": "rtsp://admin:ak123456@192.168.13.13:554/Streaming/Channels/1",
+            "gpu": true,
+            "rcnn": true,
+            "title": "2#倒罐左",
+            "slow": 0,
+            "sequence": 0,
+            "skip-frames" : 0,
+            "sample-enable": false,
+            "sample-limit": 6,
+            "safety-enable": true,
+            "distance": true,
+            "distance-min": 0.4,
+            "distance-max": 2,
+            "angle": false,
+            "angle-min": 70,
+            "angle-max": 150,
+            "angle2": false,
+            "angle2-a-min": 70,
+            "angle2-a-max": 150,
+            "angle2-b-min": 90,
+            "angle2-b-max": 270,
+            "height-map": [
+                {
+                    "key": 0,
+                    "value": 2000
+                },
+                {
+                    "key": 100,
+                    "value": 1000
+                },
+                {
+                    "key": 224,
+                    "value": 0
+                },
+                {
+                    "key": 299,
+                    "value": -2000
+                },
+                {
+                    "key": 360,
+                    "value": -7000
+                }
+            ],
+            "width-map": [
+                {
+                    "key": 0,
+                    "value": -2812
+                },
+                {
+                    "key": 304,
+                    "value": 0
+                },
+                {
+                    "key": 640,
+                    "value": 4124
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "station_id": 2,
+            "url2": "d:/share/c.mp4",
+            "url": "rtsp://admin:ak123456@192.168.13.12:554/Streaming/Channels/1",
+            "url1": "C:/Users/zhugh/Pictures/ping1.mp4",
+            "gpu": true,
+            "rcnn": true,
+            "title": "2#倒罐右",
+            "slow": 0,
+            "merge-len": 0,
+            "skip-frames" : 0,
+            "sample-enable": false,
+            "sample-weight": false,
+            "sample-limit": 6,
+            "safety-enable": true,
+            "distance": true,
+            "distance-min": 0.4,
+            "distance-max": 2,
+            "angle": false,
+            "angle-min": 70,
+            "angle-max": 150,
+            "angle2": false,
+            "angle2-a-min": 70,
+            "angle2-a-max": 150,
+            "angle2-b-min": 90,
+            "angle2-b-max": 270,
+            "height-map": [
+                {
+                    "key": 0,
+                    "value": 2000
+                },
+                {
+                    "key": 100,
+                    "value": 1000
+                },
+                {
+                    "key": 200,
+                    "value": 0
+                },
+                {
+                    "key": 299,
+                    "value": -2000
+                },
+                {
+                    "key": 360,
+                    "value": -7000
+                }
+            ],
+            "width-map": [
+                {
+                    "key": 0,
+                    "value": -2944
+                },
+                {
+                    "key": 316,
+                    "value": 0
+                },
+                {
+                    "key": 640,
+                    "value": 3000
+                }
+            ]
+        }
+    ],
+    "container-diff":{
+        "comment": "单位mm，ear-罐耳中心点为基准0，top-罐顶/罐沿，bottom-车座，b2-罐底，b3-罐座",
+        "ear": 0,
+        "top": 1889,
+        "bottom": -1285,
+        "bottom2": -3555,
+        "bottom3": -3045
+    },
+    "stations":[
+        {
+            "id": 1,
+            "title": "1#倒罐站",
+            "pos_begin": 26,
+            "pos_end": 28,
+            "third_url": "c:/video/hongwai1.mp4",
+            "active": true,
+            "left_id": 2,
+            "right_id": 1
+        },
+        {
+            "id": 2,
+            "title": "2#倒罐站",
+            "pos_begin": 38,
+            "pos_end": 40,
+            "third_url": "c:/video/hongwai1.mp4",
+            "active": true,
+            "left_id": 4,
+            "right_id": 3
+        }
+    ]
+}

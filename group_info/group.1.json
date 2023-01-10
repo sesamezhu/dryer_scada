@@ -1,0 +1,428 @@
+{
+    "id": 1,
+    "title": "连铸汽雾用气管网",
+    "pressure_max": 8.5,
+    "pressure_min": 6.8,
+    "pressure_step": 0.2,
+    "adjust_no": 3,
+    "adjust_id": 2,
+    "sub_no": 2,
+    "pressure_time": 1659059389.0423512,
+    "instruments": [
+        {
+            "id": 1,
+            "code": "E001",
+            "station_id": 1,
+            "group_id": 1,
+            "title": "0#",
+            "running": true,
+            "pressure_init": 8.0,
+            "pressure_todo": 8.0,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 80.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 80.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 15000.0,
+            "rated_A": 80.0
+        },
+        {
+            "id": 2,
+            "code": "E002",
+            "station_id": 1,
+            "group_id": 1,
+            "title": "0#",
+            "running": true,
+            "pressure_init": 7.8,
+            "pressure_todo": 7.300000000000002,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 64.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 64.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 15000.0,
+            "rated_A": 80.0
+        },
+        {
+            "id": 3,
+            "code": "E003",
+            "station_id": 1,
+            "group_id": 1,
+            "title": "0#",
+            "running": true,
+            "pressure_init": 7.6,
+            "pressure_todo": 7.6,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 50.0,
+                "discharge_open": 40.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 50.0,
+                "discharge_open": 40.0
+            },
+            "rated_Q": 12000.0,
+            "rated_A": 60.0
+        },
+        {
+            "id": 4,
+            "code": "E004",
+            "station_id": 1,
+            "group_id": 1,
+            "title": "0#",
+            "running": false,
+            "pressure_init": 7.8,
+            "pressure_todo": 7.8,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 0.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 0.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 12000.0,
+            "rated_A": 60.0
+        },
+        {
+            "id": 5,
+            "code": "E005",
+            "station_id": 1,
+            "group_id": 1,
+            "title": "0#",
+            "running": false,
+            "pressure_init": 7.8,
+            "pressure_todo": 7.8,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 0.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 0.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 12000.0,
+            "rated_A": 60.0
+        },
+        {
+            "id": 6,
+            "code": "E001",
+            "station_id": 2,
+            "group_id": 1,
+            "title": "0#",
+            "running": true,
+            "pressure_init": 8.0,
+            "pressure_todo": 8.0,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 80.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 80.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 15000.0,
+            "rated_A": 80.0
+        },
+        {
+            "id": 7,
+            "code": "E002",
+            "station_id": 2,
+            "group_id": 1,
+            "title": "0#",
+            "running": true,
+            "pressure_init": 7.8,
+            "pressure_todo": 7.8,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 80.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 80.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 15000.0,
+            "rated_A": 80.0
+        },
+        {
+            "id": 8,
+            "code": "E003",
+            "station_id": 2,
+            "group_id": 1,
+            "title": "0#",
+            "running": true,
+            "pressure_init": 7.6,
+            "pressure_todo": 7.6,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 60.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 60.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 12000.0,
+            "rated_A": 60.0
+        },
+        {
+            "id": 9,
+            "code": "E004",
+            "station_id": 2,
+            "group_id": 1,
+            "title": "0#",
+            "running": false,
+            "pressure_init": 7.8,
+            "pressure_todo": 7.8,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 0.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 0.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 12000.0,
+            "rated_A": 60.0
+        },
+        {
+            "id": 10,
+            "code": "E001",
+            "station_id": 3,
+            "group_id": 1,
+            "title": "0#",
+            "running": true,
+            "pressure_init": 8.0,
+            "pressure_todo": 8.0,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 80.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 80.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 15000.0,
+            "rated_A": 80.0
+        },
+        {
+            "id": 11,
+            "code": "E002",
+            "station_id": 3,
+            "group_id": 1,
+            "title": "0#",
+            "running": true,
+            "pressure_init": 7.8,
+            "pressure_todo": 7.8,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 80.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 80.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 15000.0,
+            "rated_A": 80.0
+        },
+        {
+            "id": 12,
+            "code": "E003",
+            "station_id": 3,
+            "group_id": 1,
+            "title": "0#",
+            "running": true,
+            "pressure_init": 7.8,
+            "pressure_todo": 7.8,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 60.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 60.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 12000.0,
+            "rated_A": 60.0
+        },
+        {
+            "id": 13,
+            "code": "E004",
+            "station_id": 3,
+            "group_id": 1,
+            "title": "0#",
+            "running": true,
+            "pressure_init": 7.6,
+            "pressure_todo": 7.6,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 60.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 60.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 12000.0,
+            "rated_A": 60.0
+        },
+        {
+            "id": 14,
+            "code": "E005",
+            "station_id": 3,
+            "group_id": 1,
+            "title": "0#",
+            "running": false,
+            "pressure_init": 7.8,
+            "pressure_todo": 7.8,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 0.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 0.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 12000.0,
+            "rated_A": 60.0
+        },
+        {
+            "id": 15,
+            "code": "E006",
+            "station_id": 3,
+            "group_id": 1,
+            "title": "0#",
+            "running": false,
+            "pressure_init": 7.8,
+            "pressure_todo": 7.8,
+            "specified": false,
+            "ignore": false,
+            "ignore_time": 0.0,
+            "real": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 0.0,
+                "discharge_open": 0.0
+            },
+            "previous": {
+                "id": 0,
+                "Q": 0.0,
+                "C": 0.0,
+                "discharge_open": 0.0
+            },
+            "rated_Q": 12000.0,
+            "rated_A": 60.0
+        }
+    ],
+    "adjustments": [
+        {
+            "instrument_id": 2,
+            "pressure": 7.300000000000002,
+            "begin": 1659059375.7491672,
+            "end": 0.0,
+            "effect": false,
+            "success": false
+        }
+    ]
+}
