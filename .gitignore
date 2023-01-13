@@ -8,8 +8,8 @@
 **/configs/config.json
 test/**
 # disable auto add learning files
-**/build/**
-**/dist/**
+build/**
+dist/**
 # CMake
 cmake-build-*/
 # File-based project format

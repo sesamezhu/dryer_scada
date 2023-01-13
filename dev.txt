@@ -1,0 +1,4 @@
+todo
+type check: OPC_DryerSend.DewPoint_Control/Heater_Control/Regeneration_Control
+field check: CDyer_DewPoint
+exec: configs/BB_Threshold.sql

@@ -55,13 +55,13 @@ class DryerControl:
             self.heat_reduce_begin(item)
             self.heat_reduce_end(item)
             self.regenerate(item)
-            # if self._switch.heat_begin < time_elapse < self._switch.heat_end
 
     def sum_env_temp(self, item: DryerEntity):
         if self._switch.env_begin < item.time_elapse < self._switch.env_end:
             # 1.1 吸附塔工作后对应3~4小时之间的环境温度平均值
             real = item.real_station
-            item.dew_temp_sum.add(real.Air_T, real.Id)
+            if item.dew_temp_sum.add(real.Air_T, real.Id):
+                time_log(f"{item.equip_code} dew_temp_sum.added {real.Air_T}-{real.Id}")
         elif self._switch.env_end <= item.time_elapse and not item.dew_temp_sum.sync_db:
             if not item.work_dew_sum.valid:
                 item.dew_temp_sum.sync_db = True
@@ -78,7 +78,8 @@ class DryerControl:
         real = item.real
         if self._switch.single_begin < item.time_elapse < self._switch.single_end:
             # 2.1 吸附塔单独工作后5分钟内压缩空气平均露点温度
-            item.work_dew_sum.add(real.CDyer_DewPoint, real.Id)
+            if item.work_dew_sum.add(real.CDyer_DewPoint, real.Id):
+                time_log(f"{item.equip_code} work_dew_sum.added {real.CDyer_DewPoint}-{real.Id}")
         elif self._switch.single_end <= item.time_elapse and not item.work_dew_sum.sync_db:
             heat = item.work_heat
             if not item.work_dew_sum.valid:
@@ -169,7 +170,6 @@ class DryerControl:
     def regenerate(self, item: DryerEntity):
         if self.dew_outside_thresh(item):
             return
-
         if item.regen_begin_id <= 0 and \
                 self._switch.dew_begin < item.time_elapse < self._switch.dew_end and \
                 item.real.CDyer_DewPoint >= item.conclusion.DewPoint:

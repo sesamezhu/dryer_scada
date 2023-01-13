@@ -23,11 +23,14 @@ class SumEntity:
     def fetch_tick(time: Tuple[int, int, int]) -> int:
         return time[0] * 3600 + time[1] * 60 + time[2]
 
-    def add(self, value: float, tick: int):
-        if tick != self.tick and value == 0.0:
-            self.sum += value
+    def add(self, value: float, tick: int) -> bool:
+        f = float(value)
+        if tick != self.tick and f != 0.0:
+            self.sum += f
             self.count += 1
             self.tick = tick
+            return True
+        return False
 
 
 @dataclass
@@ -53,16 +56,21 @@ class DryerEntity:
     prev_station = None
     step: int = 0
     time_elapse: Tuple[int, int, int] = (0, 0, 0)
-    dew_temp_sum: SumEntity = SumEntity()
+    dew_temp_sum: SumEntity = None
     regen_begin_id: int = 0
     regen_end_id: int = 0
-    a_dew_sum: SumEntity = SumEntity()
-    b_dew_sum: SumEntity = SumEntity()
-    a_heat: TowerHeatEntity = TowerHeatEntity()
-    b_heat: TowerHeatEntity = TowerHeatEntity()
+    a_dew_sum: SumEntity = None
+    b_dew_sum: SumEntity = None
+    a_heat: TowerHeatEntity = None
+    b_heat: TowerHeatEntity = None
 
     def __init__(self):
         self._is_a_work = True
+        self.dew_temp_sum = SumEntity()
+        self.a_dew_sum = SumEntity()
+        self.b_dew_sum = SumEntity()
+        self.a_heat = TowerHeatEntity()
+        self.b_heat = TowerHeatEntity()
 
     def fill_conclusion(self, conclusion):
         self.conclusion = conclusion

@@ -11,7 +11,7 @@ import multiprocessing
 json_sql_path = "configs/sql.json"
 json_config_path = "configs/config.json"
 CONN_POOL_LEN = 1
-CONN_MAX_COUNT = 128000
+CONN_MAX_COUNT = 128
 
 
 def read_sql_json():
@@ -53,7 +53,7 @@ class SqlOperation:
         for item in self._str_sql["sqls"]:
             self.sqls[item["id"]] = " ".join(item["sql"])
 
-    def acquire_cursor(self):
+    def acquire_conn(self) -> OdbcConnItem:
         retry_times = 0
         while True:
             with self._locker:
@@ -65,73 +65,66 @@ class SqlOperation:
                         self._number = 0
                     conn = self._conns[self._number]
                     if not conn.committing:
-                        # sys.stdout.write("acquire conn.no {}\n".format(self._number))
+                        if conn.count >= CONN_MAX_COUNT:
+                            try:
+                                conn.conn.close()
+                            except:
+                                traceback.print_exc()
+                            conn = OdbcConnItem(self._config_conn)
+                            self._conns[self._number] = conn
                         conn.committing = True
-                        return conn.cursor
+                        return conn
             retry_times += 1
             time_err(f"failed to acquire conn from pool: {retry_times}")
             if retry_times > 6:
                 return None
             time.sleep(0.03)
 
-    def release_cursor(self, cursor):
-        conn: OdbcConnItem = None
+    def release_conn(self, conn):
         with self._locker:
-            for item in self._conns:
-                if item.cursor == cursor:
-                    item.count += 1
-                    if item.count > CONN_MAX_COUNT:
-                        conn = item
-                    else:
-                        item.committing = False
-                    break
-        if conn is not None:
-            # replace conn with a new
-            with self._locker:
-                self._conns.remove(conn)
-            try:
-                conn.conn.close()
-            except:
-                traceback.print_exc()
-            try:
-                conn = OdbcConnItem(self._str_sql["conn"])
-            except:
-                traceback.print_exc()
-            with self._locker:
-                self._conns.append(conn)
+            conn.committing = False
 
     def execute(self, key, *params):
-        time_log(f"sql_execute:{key} { params}")
-        cursor = self.acquire_cursor()
+        time_log(f"sql_executing:{key} {params}")
+        return self.do_execute("execute", key, params)
+
+    def do_execute(self, _type, key, params):
+        conn = self.acquire_conn()
+        if conn is None:
+            time_log(f"GOT NULL CONNECTION:{key} {params}")
+            return None
         try:
+            return self.invoke(_type, conn.cursor, key, params)
+        except BaseException as err:
+            traceback.print_exc()
+            conn.count += 1
+            raise err
+        finally:
+            self.release_conn(conn)
+
+    def invoke(self, _type, cursor, key, params):
+        if _type == "execute":
             cursor.execute(self.sqls[key], params)
             cursor.commit()
-        finally:
-            self.release_cursor(cursor)
-
-    def fetch_all(self, key, *params):
-        cursor = self.acquire_cursor()
-        try:
+            return None
+        elif _type == "fetch_all":
             cursor.execute(self.sqls[key], params)
             return cursor.fetchall()
-        finally:
-            self.release_cursor(cursor)
-
-    def fetch_one(self, key, *params):
-        cursor = self.acquire_cursor()
-        try:
+        elif _type == "fetch_one":
             cursor.execute(self.sqls[key], params)
             return cursor.fetchone()
-        finally:
-            self.release_cursor(cursor)
-
-    def fetch_val(self, key, *params):
-        cursor = self.acquire_cursor()
-        try:
+        elif _type == "fetch_val":
             cursor.execute(self.sqls[key], params)
             return cursor.fetchval()
-        finally:
-            self.release_cursor(cursor)
+
+    def fetch_all(self, key, *params):
+        return self.do_execute("fetch_all", key, params)
+
+    def fetch_one(self, key, *params):
+        return self.do_execute("fetch_one", key, params)
+
+    def fetch_val(self, key, *params):
+        return self.do_execute("fetch_val", key, params)
 
     def close(self):
         while self._conns:
