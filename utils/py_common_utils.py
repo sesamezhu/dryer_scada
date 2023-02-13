@@ -83,7 +83,10 @@ def check_dup_process(port: int):
 def add_minute(hms: typing.Tuple[int, int, int], add: int):
     minute = hms[1] + add
     hour = hms[0]
-    if minute > 60:
+    if minute >= 60:
         hour += 1
         minute -= 60
+    elif minute < 0:
+        hour -= 1
+        minute += 60
     return hour, minute, hms[2]

@@ -7,6 +7,8 @@ class ConfigSwitch:
         self.interval_seconds = 10
         self.sleep_seconds = 1
         self.port = 47111
+        self.max_switch = 32
+        self.max_reduce = 55
         self.single_begin = (0, 20, 0)
         self.single_end = (0, 25, 0)
         self.heat_begin = (0, 28, 0)
@@ -22,6 +24,8 @@ class ConfigSwitch:
         result.interval_seconds = item["interval_seconds"]
         result.sleep_seconds = item["sleep_seconds"]
         result.port = item["port"]
+        result.max_switch = item["max_switch"]
+        result.max_reduce = item["max_reduce"]
         result.single_begin = ConfigSwitch.parse_elapse(item["single_begin"])
         result.single_end = ConfigSwitch.parse_elapse(item["single_end"])
         result.heat_begin = ConfigSwitch.parse_elapse(item["heat_begin"])

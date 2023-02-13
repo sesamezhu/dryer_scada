@@ -9,7 +9,8 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[
-        ('test_case/*', 'test_case'),
+        ('resource/*', 'resource'),
+        ('Source/Images/*', 'Source/Images'),
         ('configs/*', 'configs')
         ],
     hiddenimports=[],
@@ -29,8 +30,8 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='main',
-    debug=False,
+    name='dryer_scada',
+    debug=True,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
@@ -49,5 +50,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='main',
+    name='py_dryer',
 )

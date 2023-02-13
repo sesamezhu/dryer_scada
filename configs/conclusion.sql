@@ -1,13 +1,3 @@
-USE [SCADA]
-GO
-
-/****** Object:  Table [dbo].[AP_AdsorptionDryer_Conclusion]    Script Date: 2023-01-13 17:18:57 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE TABLE [dbo].[AP_AdsorptionDryer_Conclusion](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[DateTime] [datetime2] NULL,

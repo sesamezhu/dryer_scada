@@ -1,4 +1,8 @@
+说明：本次工作15台干燥机对象为
+1#站:3#、4#、6#干燥机，
+2#站:4#、5#干燥机，
+3#站:2~6#干燥机，
+4#站:3~7#干燥机。
+加热关闭，电流有效：2-4，4-6，
+
 todo
-type check: OPC_DryerSend.DewPoint_Control/Heater_Control/Regeneration_Control
-field check: CDyer_DewPoint
-exec: configs/BB_Threshold.sql

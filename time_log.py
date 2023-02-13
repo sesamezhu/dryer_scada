@@ -81,7 +81,7 @@ def time_log(s):
     time_key(s, str(threading.get_ident()), __dual_log)
 
 
-def restore():
+def terminal_restore():
     global __dual_log
     sys.stdout = __dual_log.terminal
     global __error_log

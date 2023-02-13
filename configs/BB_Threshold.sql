@@ -1,4 +1,3 @@
-SET NOCOUNT ON
 SET IDENTITY_INSERT BB_Threshold ON
 INSERT INTO BB_Threshold
 ([ID],[Name],[SetValue],[CurrentValue],[classify],[Description],[RealDescription])

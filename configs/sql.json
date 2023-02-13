@@ -71,6 +71,14 @@
       ]
     },
     {
+      "id": "Dryer_Real_oldest",
+      "sql": [
+        "select top 1 * from  [dbo].[AP_AdsorptionDryer_Real]",
+        "where EquipID=? and StationID=?",
+        "order by id"
+      ]
+    },
+    {
       "id": "Station_Real_latest",
       "sql": [
         "select top 1 * from [dbo].[AP_Station_Real]",
@@ -85,7 +93,7 @@
         "[DateTime],[DayID],[FactoryID],[StationID],[EquipID],",
         "[DewPoint_Control],[Heater_Control],[Regeneration_Control],[IsSend])",
         "OUTPUT INSERTED.Id",
-        "VALUES(getdate(),'D0',?,?,?,NULL,?,?,'0')"
+        "VALUES(getdate(),'D0',?,?,?,?,?,?,'0')"
       ]
     },
     {

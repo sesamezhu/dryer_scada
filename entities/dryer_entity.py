@@ -39,6 +39,7 @@ class TowerHeatEntity:
     heat_reduce: int = 0
     dew_point: float = 100.0
     begin_id: int = 0
+    begin_elapse = (0, 0, 0)
     end_id: int = 0
 
     def reset(self):
@@ -52,17 +53,20 @@ class DryerEntity:
     conclusion = None
     real = None
     previous = None
+    oldest = None
     real_station = None
     prev_station = None
-    step: int = 0
     time_elapse: Tuple[int, int, int] = (0, 0, 0)
     dew_temp_sum: SumEntity = None
+    init_control_id: int = 0
     regen_begin_id: int = 0
     regen_end_id: int = 0
     a_dew_sum: SumEntity = None
     b_dew_sum: SumEntity = None
     a_heat: TowerHeatEntity = None
     b_heat: TowerHeatEntity = None
+    switch_count: int = 0
+    auto_control: bool = None
 
     def __init__(self):
         self._is_a_work = True
@@ -83,7 +87,10 @@ class DryerEntity:
 
     @staticmethod
     def time_from_real(real) -> Tuple[int, int, int]:
-        return int(real.Load_Rate), int(real.RUN_Time), int(real.RunTime_Rate)
+        _hour = int(real.Load_Rate)
+        if 0 <= _hour <= 24:
+            return int(real.Load_Rate), int(real.RUN_Time), int(real.RunTime_Rate)
+        return 0, 0, 0
 
     @property
     def is_a_work(self) -> bool:
@@ -143,5 +150,15 @@ class DryerEntity:
         return self.conclusion.Id
 
     @property
-    def equip_code(self):
+    def equip_code(self) -> str:
         return f"{self.conclusion.StationID}-{self.conclusion.EquipID}"
+
+    @property
+    def real_run(self) -> bool:
+        return self.real is not None and int(self.real.Run) == 1
+
+    @property
+    def step(self) -> int:
+        if self.real is None:
+            return 0
+        return int(self.real.Outlet_Q)
