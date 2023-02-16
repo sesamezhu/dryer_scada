@@ -104,13 +104,6 @@
       ]
     },
     {
-      "id": "Threshold_by_id",
-      "sql": [
-         "select [CurrentValue] from [dbo].[BB_Threshold]",
-         "where id=?"
-      ]
-    },
-    {
       "id": "Threshold_by_name",
       "sql": [
          "select top 1 [CurrentValue] from [dbo].[BB_Threshold]",

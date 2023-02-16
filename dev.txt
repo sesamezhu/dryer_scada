@@ -5,4 +5,13 @@
 4#站:3~7#干燥机。
 加热关闭，电流有效：2-4，4-6，
 
-todo
+release:
+
+1. INSERT INTO BB_Threshold
+([Name],[SetValue],[CurrentValue],[classify],[Description],[RealDescription])
+VALUES
+(N'干燥机露点温度再生切换阈值',-40,-40,N'4',N'干燥机露点温度再生切换阈值',N'干燥机露点温度再生切换阈值'),
+(N'干燥机出口温度阈值',60,60,N'4',N'干燥机出口温度阈值',N'干燥机出口温度阈值')
+2. sql.json
+3. DetailRect.qml
+4. exe

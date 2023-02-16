@@ -8,3 +8,9 @@ VALUES
 ,(85,N'干燥机露点月均气温温差阈值',5.00,5.00,N'4',N'干燥机露点月均气温温差阈值',N'干燥机露点月均气温温差阈值')
 ,(86,N'干燥机露点节能提高阈值',1.00,1.00,N'4',N'干燥机露点节能提高阈值',N'干燥机露点节能提高阈值')
 SET IDENTITY_INSERT BB_Threshold OFF
+
+INSERT INTO BB_Threshold
+([Name],[SetValue],[CurrentValue],[classify],[Description],[RealDescription])
+VALUES
+(N'干燥机露点温度再生切换阈值',-40,-40,N'4',N'干燥机露点温度再生切换阈值',N'干燥机露点温度再生切换阈值'),
+(N'干燥机出口温度阈值',60,60,N'4',N'干燥机出口温度阈值',N'干燥机出口温度阈值')

@@ -95,4 +95,10 @@ Rectangle{
             ",rt:" + modelData.accumulate_rate.toFixed(2)
         font.pixelSize: font_size
     }
+    Text{
+        id: heat_temp_text
+        anchors.top:accumulate_text.bottom
+        text: "heat_t:" + modelData.heat_out_t + ",dry_t:" + modelData.dryer_out_t
+        font.pixelSize: font_size
+    }
 }

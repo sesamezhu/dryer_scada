@@ -79,7 +79,7 @@ class DryerControl(QThread):
             self.sum_env_temp(item)
             self.heat_reduce_begin(item)
             self.heat_reduce_end(item)
-            self.regenerate(item)
+            self.regenerate_begin(item)
 
     def sum_env_temp(self, item: DryerEntity):
         if self._switch.env_begin < item.time_elapse < self._switch.env_end:
@@ -213,20 +213,26 @@ class DryerControl(QThread):
         thresh_low = threshold_by_name("干燥机露点温度控制点下限")
         return item.conclusion.DewPoint >= thresh_high or item.conclusion.DewPoint <= thresh_low
 
-    def regenerate(self, item: DryerEntity):
+    def regenerate_begin(self, item: DryerEntity):
         if not item.real_run:
             return
         if item.step != 12 and item.step != 11:
             return
         if self.dew_outside_thresh(item):
             return
-        if item.regen_begin_id <= 0 and \
-                self._switch.dew_begin < item.time_elapse < self._switch.dew_end and \
-                item.real.CDyer_DewPoint >= item.conclusion.DewPoint:
+        if item.regen_begin_id > 0:
+            return
+        if not (self._switch.dew_begin < item.time_elapse < self._switch.dew_end):
+            return
+        thresh_dew = threshold_by_name("干燥机露点温度再生切换阈值")
+        if item.real.CDyer_DewPoint >= item.conclusion.DewPoint or \
+                item.real.CDyer_DewPoint >= thresh_dew:
             # Regeneration_Control
             item.conclusion.Regeneration_Control = 1
             self.conclusion_update_control(item.conclusion)
             item.regen_begin_id = self.insert_control(item.conclusion, None, "1")
+
+    def regenerate_end(self, item: DryerEntity):
         if item.regen_begin_id > 0 and item.regen_end_id <= 0:
             row = sql_executor.fetch_one("OPC_DryerSend_sel_by_id", item.regen_begin_id)
             if row is not None and row.IsSend == "1":
@@ -252,6 +258,9 @@ class DryerControl(QThread):
         begin_elapse = add_minute(self._switch.heat_end, -heat.heat_reduce)
         if item.time_elapse < begin_elapse:
             return
+        thresh_temp = threshold_by_name("干燥机出口温度阈值")
+        if item.real.HeatTowerOutT < thresh_temp:
+            return
         item.conclusion.Heater_Control = 1
         self.conclusion_update_control(item.conclusion)
         heat.begin_id = self.insert_control(item.conclusion, "1", None)
@@ -261,8 +270,10 @@ class DryerControl(QThread):
         heat = item.refresh_heat
         if heat.end_id > 0 or heat.begin_id <= 0:
             return
+        thresh_temp = threshold_by_name("干燥机出口温度阈值")
         end_elapse = add_minute(heat.begin_elapse, heat.heat_reduce)
-        if item.time_elapse < end_elapse and item.step == 5:
+        if item.time_elapse < end_elapse and item.step == 5 and\
+                item.real.HeatTowerOutT > thresh_temp - 5:
             return
         item.conclusion.Heater_Control = 0
         self.conclusion_update_control(item.conclusion)

@@ -127,6 +127,18 @@ class DetailModel(QObject):
         return self._instrument.real.CDyer_DewPoint
 
     @Property(float, notify=myNotified)
+    def heat_out_t(self) -> float:
+        if self._instrument.real is None:
+            return 0.0
+        return self._instrument.real.HeatTowerOutT
+
+    @Property(float, notify=myNotified)
+    def dryer_out_t(self) -> float:
+        if self._instrument.real is None:
+            return 0.0
+        return self._instrument.real.CDyer_OutT
+
+    @Property(float, notify=myNotified)
     def heater_power(self):
         if self._instrument.real is None:
             return 0.0
