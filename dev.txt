@@ -6,6 +6,7 @@
 加热关闭，电流有效：2-4，4-6，
 
 release:
+D:\code\cv\Dryer_SCADA\dist\py_dryer
 
 1. INSERT INTO BB_Threshold
 ([Name],[SetValue],[CurrentValue],[classify],[Description],[RealDescription])

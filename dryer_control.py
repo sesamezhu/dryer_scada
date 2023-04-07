@@ -58,14 +58,13 @@ class DryerControl(QThread):
             return
         self.put_real(item, real, station_real)
         auto_control = DryerControl.is_auto_control(item.id)
-        if not auto_control or not item.real_run:
-            if auto_control != item.auto_control:
-                # 当前变为手动控制
-                self.insert_control2(item.conclusion, "0", "0", "0")
+        if auto_control != item.auto_control:
+            self.insert_control2(item.conclusion,
+                                 "1" if auto_control else "0", "0", "0")
             item.auto_control = auto_control
+        if not item.auto_control or not item.real_run:
             item.time_elapse = item.time_from_real(real)
             return
-        item.auto_control = auto_control
         time_elapse = item.time_from_real(real)
         if time_elapse == (0, 0, 0):
             time_log(f"{item.equip_code} absolute 0 time elapse")
@@ -216,7 +215,7 @@ class DryerControl(QThread):
     def regenerate_begin(self, item: DryerEntity):
         if not item.real_run:
             return
-        if item.step != 12 and item.step != 11:
+        if item.step != 12:
             return
         if self.dew_outside_thresh(item):
             return
@@ -259,7 +258,7 @@ class DryerControl(QThread):
         if item.time_elapse < begin_elapse:
             return
         thresh_temp = threshold_by_name("干燥机出口温度阈值")
-        if item.real.HeatTowerOutT < thresh_temp:
+        if item.real.CDyer_HeatTowerOutT < thresh_temp:
             return
         item.conclusion.Heater_Control = 1
         self.conclusion_update_control(item.conclusion)
@@ -273,7 +272,7 @@ class DryerControl(QThread):
         thresh_temp = threshold_by_name("干燥机出口温度阈值")
         end_elapse = add_minute(heat.begin_elapse, heat.heat_reduce)
         if item.time_elapse < end_elapse and item.step == 5 and\
-                item.real.HeatTowerOutT > thresh_temp - 5:
+                item.real.CDyer_HeatTowerOutT > thresh_temp - 5:
             return
         item.conclusion.Heater_Control = 0
         self.conclusion_update_control(item.conclusion)
