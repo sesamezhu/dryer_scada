@@ -8,6 +8,12 @@
 release:
 D:\code\cv\Dryer_SCADA\dist\py_dryer
 
+2023-04-10 release step
+1. config add:  "heat_min_round": "05:10:00",
+2. exe
+3. 2 qml
+
+2023-02-02
 1. INSERT INTO BB_Threshold
 ([Name],[SetValue],[CurrentValue],[classify],[Description],[RealDescription])
 VALUES

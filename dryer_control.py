@@ -38,10 +38,10 @@ class DryerControl(QThread):
         time_log(f"process instruments count {len(self._instruments)}")
         for item in self._app_share.detail_models2:
             if self._app_share.stopped:
-                time_log(f"{item.equip_code} got self._app_share.stopped")
+                time_log(f"{item.code} got self._app_share.stopped")
                 break
             try:
-                self.process_each(item._instrument)
+                self.process_each(item.my_entity())
                 item.myNotified.emit()
             except:
                 traceback.print_exc()
@@ -57,28 +57,36 @@ class DryerControl(QThread):
             time_log(f"{item.equip_code} NULL_station_real record")
             return
         self.put_real(item, real, station_real)
-        auto_control = DryerControl.is_auto_control(item.id)
-        if auto_control != item.auto_control:
-            self.insert_control2(item.conclusion,
-                                 "1" if auto_control else "0", "0", "0")
-            item.auto_control = auto_control
+        self.control_switch(item)
         if not item.auto_control or not item.real_run:
             item.time_elapse = item.time_from_real(real)
+            item.previous_elapse = (0, 0, 0)
             return
         time_elapse = item.time_from_real(real)
         if time_elapse == (0, 0, 0):
-            time_log(f"{item.equip_code} absolute 0 time elapse")
+            time_log(f"""{item.equip_code} absolute 0 time elapse.
+exit for avoid misjudge initial state""")
             return
-        tower_switch = time_elapse[0] < item.time_elapse[0] or item.time_elapse == (0, 0, 0)
-        item.time_elapse = time_elapse
+        tower_switch = time_elapse[0] < item.time_elapse[0] or item.is_initial
         if tower_switch:
+            item.previous_elapse = item.time_elapse
+            item.time_elapse = time_elapse
             self.reset_dryer(item)
         else:
+            item.time_elapse = time_elapse
             self.sum_work_dew(item)
             self.sum_env_temp(item)
             self.heat_reduce_begin(item)
             self.heat_reduce_end(item)
             self.regenerate_begin(item)
+
+    def control_switch(self, item: DryerEntity):
+        auto_control = DryerControl.is_auto_control(item.id)
+        if auto_control != item.auto_control:
+            if not item.is_initial:
+                flag = "1" if auto_control else "0"
+                self.insert_control2(item.conclusion, flag, "0", "0")
+            item.auto_control = auto_control
 
     def sum_env_temp(self, item: DryerEntity):
         if self._switch.env_begin < item.time_elapse < self._switch.env_end:
@@ -254,6 +262,9 @@ class DryerControl(QThread):
             return
         if item.step != 5:
             return
+        if item.previous_elapse < self._switch.heat_min_round:
+            # 上个周期在露点模式下，切换周期＜5小时10分，这个周期不对加热器进行控制
+            return
         begin_elapse = add_minute(self._switch.heat_end, -heat.heat_reduce)
         if item.time_elapse < begin_elapse:
             return
@@ -271,7 +282,7 @@ class DryerControl(QThread):
             return
         thresh_temp = threshold_by_name("干燥机出口温度阈值")
         end_elapse = add_minute(heat.begin_elapse, heat.heat_reduce)
-        if item.time_elapse < end_elapse and item.step == 5 and\
+        if item.time_elapse < end_elapse and item.step == 5 and \
                 item.real.CDyer_HeatTowerOutT > thresh_temp - 5:
             return
         item.conclusion.Heater_Control = 0

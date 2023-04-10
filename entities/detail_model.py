@@ -10,6 +10,9 @@ class DetailModel(QObject):
         super().__init__(_parent)
         self._instrument = instrument
 
+    def my_entity(self) -> DryerEntity:
+        return self._instrument
+
     @Property(int, notify=myNotified)
     def id(self) -> int:
         return self._instrument.id
@@ -30,17 +33,15 @@ class DetailModel(QObject):
             return 0
         return int(self._instrument.real.Outlet_Q)
 
-    @Property(int, notify=myNotified)
-    def elapse_hour(self) -> int:
-        return self._instrument.time_elapse[0]
+    @Property(str, notify=myNotified)
+    def elapse_text(self) -> str:
+        item = self._instrument.time_elapse
+        return f"{item[0]}-{item[1]}-{item[2]}"
 
-    @Property(int, notify=myNotified)
-    def elapse_minute(self) -> int:
-        return self._instrument.time_elapse[1]
-
-    @Property(int, notify=myNotified)
-    def elapse_second(self) -> int:
-        return self._instrument.time_elapse[2]
+    @Property(str, notify=myNotified)
+    def elapse_prev(self) -> str:
+        item = self._instrument.previous_elapse
+        return f"{item[0]}-{item[1]}-{item[2]}"
 
     @Property(bool, notify=myNotified)
     def a_working(self) -> bool:

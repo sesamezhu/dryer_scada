@@ -1,6 +1,8 @@
-from typing import List, Dict, Tuple
+from typing import List, Tuple
 import numpy as np
 from PySide6.QtCore import QObject, Signal
+
+from entities.detail_model import DetailModel
 
 
 class AppShareModel(QObject):
@@ -10,7 +12,7 @@ class AppShareModel(QObject):
         super().__init__(parent)
         self._stopped = False
         self.log_frames: List[Tuple[np.ndarray, str, str]] = []
-        self.detail_models2: List = []
+        self.detail_models2: List[DetailModel] = []
 
     @property
     def stopped(self) -> bool:

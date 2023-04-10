@@ -57,6 +57,7 @@ class DryerEntity:
     real_station = None
     prev_station = None
     time_elapse: Tuple[int, int, int] = (0, 0, 0)
+    previous_elapse: Tuple[int, int, int] = (0, 0, 0)
     dew_temp_sum: SumEntity = None
     init_control_id: int = 0
     regen_begin_id: int = 0
@@ -162,3 +163,7 @@ class DryerEntity:
         if self.real is None:
             return 0
         return int(self.real.Outlet_Q)
+
+    @property
+    def is_initial(self):
+        return self.time_elapse == (0, 0, 0)

@@ -49,7 +49,6 @@ Window{
             height: parent.height - anchors.topMargin * 2
             flow: Grid.LeftToRight
             Repeater{
-                id:repeater
                 model:backend.detail_models
                 DetailRect{}
             }

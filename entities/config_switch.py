@@ -17,6 +17,7 @@ class ConfigSwitch:
         self.dew_end = (6, 30, 0)
         self.env_begin = (3, 0, 0)
         self.env_end = (4, 0, 0)
+        self.heat_min_round = (5, 10, 0)
 
     @staticmethod
     def from_config(item):
@@ -34,6 +35,7 @@ class ConfigSwitch:
         result.dew_end = ConfigSwitch.parse_elapse(item["dew_end"])
         result.env_begin = ConfigSwitch.parse_elapse(item["env_begin"])
         result.env_end = ConfigSwitch.parse_elapse(item["env_end"])
+        result.heat_min_round = ConfigSwitch.parse_elapse(item["heat_min_round"])
         return result
 
     @staticmethod
