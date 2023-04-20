@@ -1,3 +1,5 @@
+import time
+import typing
 from dataclasses import dataclass
 from typing import Tuple
 
@@ -76,6 +78,7 @@ class DryerEntity:
         self.b_dew_sum = SumEntity()
         self.a_heat = TowerHeatEntity()
         self.b_heat = TowerHeatEntity()
+        self.step_map: typing.Dict[int, float] = {}
 
     def fill_conclusion(self, conclusion):
         self.conclusion = conclusion
@@ -167,3 +170,7 @@ class DryerEntity:
     @property
     def is_initial(self):
         return self.time_elapse == (0, 0, 0)
+
+    def step_seconds(self, step: int) -> float:
+        gotten = self.step_map.get(step)
+        return 0 if gotten is None else time.time() - gotten

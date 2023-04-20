@@ -157,11 +157,19 @@ exit for avoid misjudge initial state""")
             item.real = real
             # 0：A塔干燥B塔再生；1：B塔干燥A塔再生
             item.is_a_work = int(real.Inlet_Q) == 0
+            DryerControl.put_step_map(item)
         item.prev_station = None
         if item.real_station is None or item.real_station.Id != station_real.Id:
             item.prev_station = item.real_station
             item.real_station = station_real
         item.oldest = DryerControl.get_oldest(item.conclusion)
+
+    @staticmethod
+    def put_step_map(item: DryerEntity):
+        step = item.step
+        gotten = item.step_map.get(step)
+        if gotten is None:
+            item.step_map[step] = time.time()
 
     def reset_dryer(self, item: DryerEntity):
         item.previous = None
@@ -178,6 +186,7 @@ exit for avoid misjudge initial state""")
         item.dew_temp_sum = SumEntity()
         item.regen_begin_id = 0
         item.regen_end_id = 0
+        item.step_map.clear()
         item.init_control_id = self.insert_control(item.conclusion, "0", "0")
 
     @staticmethod
@@ -223,7 +232,7 @@ exit for avoid misjudge initial state""")
     def regenerate_begin(self, item: DryerEntity):
         if not item.real_run:
             return
-        if item.step != 12:
+        if item.step != 12 and item.step_seconds(11) < self._switch.step11_min_seconds:
             return
         if self.dew_outside_thresh(item):
             return

@@ -33,6 +33,14 @@ class DetailModel(QObject):
             return 0
         return int(self._instrument.real.Outlet_Q)
 
+    @Property(float, notify=myNotified)
+    def step_seconds(self) -> float:
+        for step in range(12, 0, -1):
+            seconds = self._instrument.step_seconds(step)
+            if seconds > 0:
+                return seconds
+        return 0.0
+
     @Property(str, notify=myNotified)
     def elapse_text(self) -> str:
         item = self._instrument.time_elapse

@@ -18,6 +18,7 @@ class ConfigSwitch:
         self.env_begin = (3, 0, 0)
         self.env_end = (4, 0, 0)
         self.heat_min_round = (5, 10, 0)
+        self.step11_min_seconds = 290
 
     @staticmethod
     def from_config(item):
@@ -36,6 +37,7 @@ class ConfigSwitch:
         result.env_begin = ConfigSwitch.parse_elapse(item["env_begin"])
         result.env_end = ConfigSwitch.parse_elapse(item["env_end"])
         result.heat_min_round = ConfigSwitch.parse_elapse(item["heat_min_round"])
+        result.step11_min_seconds = item["step11_min_seconds"]
         return result
 
     @staticmethod

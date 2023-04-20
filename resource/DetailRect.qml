@@ -31,7 +31,8 @@ Rectangle{
     Text{
         id: elapse_text
         anchors.top:a_working_text.bottom
-        text: "elapse:" + modelData.elapse_text + " prev:" + modelData.elapse_prev
+        text: "elps:" + modelData.elapse_text + " pre:" + modelData.elapse_prev
+            + " mnt:" + (modelData.step_seconds/60).toFixed(1)
         font.pixelSize: font_size
     }
     Text{

@@ -8,6 +8,15 @@
 release:
 D:\code\cv\Dryer_SCADA\dist\py_dryer
 
+2023-04-12 release step11
+0.init db: update [dbo].[AP_AdsorptionDryer_Conclusion]
+set DewPoint=100,
+ATower_DewLevel=100,ATower_HeatReduce=0,ATower_DewPoint=100,
+BTower_DewLevel=100,BTower_HeatReduce=0,BTower_DewPoint=100
+1. config add: "step11_min_seconds": 290,
+2. exe
+3. 1 qml
+
 2023-04-10 release step
 1. config add:  "heat_min_round": "05:10:00",
 2. exe
