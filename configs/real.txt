@@ -1,0 +1,14 @@
+1	Run	运行反馈信号
+2	ShutDown	停机信号
+3	Error	故障信号
+15	CDyer_HeatTowerOutT	组合式干燥机加热塔出口温度值
+16	CDyer_DewPoint	组合式干燥机吸干露点值
+18	Heater_Power	干燥机电流
+19	Blower_Power	干燥机电压
+23	Inlet_Q	 干燥机状态（0：a塔干燥b塔再生 1：b塔干燥a塔再生）
+24	Outlet_Q 干燥机运行阶段（1~12）
+25	Power	干燥机累积电量
+26	UPI	干燥机累积运行时长
+27	Load_Rate	运行小时
+28	RUN_Time	运行分钟
+29	RunTime_Rate 运行秒钟

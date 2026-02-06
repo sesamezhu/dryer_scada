@@ -1,10 +1,14 @@
+from entities.dryer_entity import DryerEntity
 from utils.config_sql_item import sql_executor
 
 
-class HeatBiz:
-    def __init__(self):
-        pass
-
-
-def threshold_by_name(name: str):
+def threshold_by_name(name: str) -> float:
     return sql_executor.fetch_val("Threshold_by_name", name)
+
+
+class HeatBiz:
+    @staticmethod
+    def threshold(pre, item: DryerEntity) -> float:
+        value = threshold_by_name(f"{pre}{item.site_id}{item.sub_id}")
+        if value is None:
+            return threshold_by_name(pre)

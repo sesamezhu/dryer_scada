@@ -13,25 +13,6 @@ def read_json():
         return json.load(f)
 
 
-def write_json(config):
-    with open(json_file_path, 'w', encoding='utf-8') as f:
-        json.dump(config, f, indent=4, ensure_ascii=False)
-
-
-def save_config(key, value):
-    config = read_json()
-    config[key] = value
-    with open(json_file_path, 'w') as f:
-        json.dump(config, f, indent=4)
-
-
 def read_config(key):
     config = read_json()
     return config.get(key, None)
-
-
-def save_video_item(index, key, value):
-    config = read_json()
-    videos = config.get("videos")
-    videos[index][key] = value
-    write_json(config)

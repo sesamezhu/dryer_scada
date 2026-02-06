@@ -55,7 +55,7 @@ class DetailModel(QObject):
     def a_working(self) -> bool:
         return self._instrument.is_a_work
 
-    @Property(bool, notify=myNotified)
+    @Property(float, notify=myNotified)
     def a_working2(self):
         if self._instrument.real is None:
             return -1

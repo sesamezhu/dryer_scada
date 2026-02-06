@@ -5,7 +5,7 @@ from typing import List
 from PySide6.QtCore import QThread
 
 import win_config
-from biz.heat_biz import threshold_by_name
+from biz.heat_biz import threshold_by_name, HeatBiz
 from entities.app_share_model import AppShareModel
 from entities.config_switch import ConfigSwitch
 from entities.detail_model import DetailModel
@@ -99,7 +99,7 @@ exit for avoid misjudge initial state""")
                 item.dew_temp_sum.sync_db = True
                 time_log(f"{item.equip_code} dew_temp_sum.invalid {item.dew_temp_sum.count}")
                 return
-            thresh = threshold_by_name("干燥机露点温度控制点温差")
+            thresh = HeatBiz.threshold("干燥机露点温度控制点温差", item)
             item.conclusion.DewPoint = item.dew_temp_sum.avg - float(thresh)
             sql_executor.execute("AdsorptionDryer_Conclusion_update_DewPoint",
                                  item.conclusion.DewPoint, item.id)
@@ -240,7 +240,7 @@ exit for avoid misjudge initial state""")
             return
         if not (self._switch.dew_begin < item.time_elapse < self._switch.dew_end):
             return
-        thresh_dew = threshold_by_name("干燥机露点温度再生切换阈值")
+        thresh_dew = HeatBiz.threshold("干燥机露点温度再生切换阈值", item)
         if item.real.CDyer_DewPoint >= item.conclusion.DewPoint or \
                 item.real.CDyer_DewPoint >= thresh_dew:
             # Regeneration_Control
@@ -297,3 +297,7 @@ exit for avoid misjudge initial state""")
         item.conclusion.Heater_Control = 0
         self.conclusion_update_control(item.conclusion)
         heat.end_id = self.insert_control(item.conclusion, "0", None)
+
+    @property
+    def switch(self) -> ConfigSwitch:
+        return self._switch

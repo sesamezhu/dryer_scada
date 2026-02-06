@@ -1,7 +1,7 @@
 import time
 import traceback
 
-from typing import List, Tuple
+from typing import List
 
 from PySide6.QtCore import QObject, Signal, Slot, Property
 
@@ -20,8 +20,7 @@ class Backend(QObject):
         super().__init__(_parent)
         self._app_share = AppShareModel(self.parent())
         self._dryer_control = DryerControl(self._app_share)
-        self._pair_chars = ""
-        self.count_tuple: Tuple[float, int, int] = (time.time(), 0, 0)
+        self._switch = self._dryer_control.switch
 
     @Slot()
     def start_threads(self):
@@ -50,8 +49,8 @@ class Backend(QObject):
 
     @Property(int, notify=myNotified)
     def grid_rows(self) -> int:
-        return 3
+        return self._switch.grid_rows
 
     @Property(int, notify=myNotified)
     def grid_columns(self) -> int:
-        return 9
+        return self._switch.grid_columns

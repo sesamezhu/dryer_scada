@@ -158,6 +158,14 @@ class DryerEntity:
         return f"{self.conclusion.StationID}-{self.conclusion.EquipID}"
 
     @property
+    def site_id(self) -> int:
+        return int(self.conclusion.StationID[-1])
+
+    @property
+    def sub_id(self) -> int:
+        return int(self.conclusion.EquipID[-1])
+
+    @property
     def real_run(self) -> bool:
         return self.real is not None and int(self.real.Run) == 1
 

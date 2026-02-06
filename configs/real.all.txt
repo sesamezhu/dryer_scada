@@ -1,0 +1,34 @@
+1	Run	运行反馈信号
+2	ShutDown	停机信号
+3	Error	故障信号
+4	Start	启动指令(远程)
+5	Stop	停止指令(远程)
+2	CDryer_CondPre	组合式干燥机冷凝压力值
+3	CDryer_EvapPre	组合式干燥机蒸发压力值
+4	CDryer_InletPre	组合式干燥机入口压力值
+5	CDryer_OutPre	组合式干燥机出口压力值
+6	CDyer_InOutValue	组合式干燥机进出口差压值
+7	CDyer_YSJ_A	组合式干燥机压缩机电流值
+8	CDyer_JRQ_A	组合式干燥机加热器电流值
+9	CDyer_INT	组合式干燥机入口温度值
+10	CDyer_OutT	组合式干燥机出口温度值
+11	CDyer_LeakT	组合式干燥机露点温度值
+12	CDyer_ATowerT	组合式干燥机A塔温度值
+13	CDyer_BTowerT	组合式干燥机B塔温度值
+14	CDyer_HeatTowerMidT	组合式干燥机加热塔塔中温度值
+15	CDyer_HeatTowerOutT	组合式干燥机加热塔出口温度值
+16	CDyer_DewPoint	组合式干燥机吸干露点值
+17	Loss_Q	Dryer放散流量
+
+18	Heater_Power	Heater 电力	湛江项目(干燥机电流)
+19	Blower_Power	Blower 电力	湛江项目(干燥机电压)
+20	Purge_T	Purge 温度	湛江项目(干燥机功率因数)
+21	Purge_P	Purge 压力	湛江项目(干燥机瞬时功率)
+22	Purge_DP	Dew Point露点
+23	Inlet_Q	 干燥机状态（0：a塔干燥b塔再生 1：b塔干燥a塔再生）
+24	Outlet_Q 干燥机运行阶段（1~12）
+25	Power	湛江项目(干燥机累积电量)
+26	UPI	湛江项目(干燥机累积运行时长)
+27	Load_Rate	湛江项目(小时)	湛江项目(小时)
+28	RUN_Time	湛江项目(分钟)	湛江项目(分钟)
+29	RunTime_Rate	湛江项目(秒钟)	湛江项目(秒钟)

@@ -3,6 +3,8 @@ from typing import Tuple
 
 class ConfigSwitch:
     def __init__(self):
+        self.grid_rows = 3
+        self.grid_columns = 10
         # 每一小步调整间隔秒数
         self.interval_seconds = 10
         self.sleep_seconds = 1
@@ -23,6 +25,8 @@ class ConfigSwitch:
     @staticmethod
     def from_config(item):
         result = ConfigSwitch()
+        result.grid_rows = item.get("grid_rows") or 3
+        result.grid_columns = item.get("grid_columns") or 10
         result.interval_seconds = item["interval_seconds"]
         result.sleep_seconds = item["sleep_seconds"]
         result.port = item["port"]
