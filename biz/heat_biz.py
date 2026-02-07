@@ -10,5 +10,5 @@ class HeatBiz:
     @staticmethod
     def threshold(pre, item: DryerEntity) -> float:
         value = threshold_by_name(f"{pre}{item.site_id}{item.sub_id}")
-        if value is None:
-            return threshold_by_name(pre)
+        return value or threshold_by_name(pre)
+

@@ -153,6 +153,7 @@ exit for avoid misjudge initial state""")
     def put_real(item: DryerEntity, real, station_real):
         item.previous = None
         if item.real is None or item.real.Id < real.Id:
+            time_log(f"{item.equip_code} update real: {real.Id}")
             item.previous = item.real
             item.real = real
             # 0：A塔干燥B塔再生；1：B塔干燥A塔再生
@@ -240,9 +241,11 @@ exit for avoid misjudge initial state""")
             return
         if not (self._switch.dew_begin < item.time_elapse < self._switch.dew_end):
             return
+        real_dew = item.real.CDyer_DewPoint
+        heat_dew = item.conclusion.DewPoint
         thresh_dew = HeatBiz.threshold("干燥机露点温度再生切换阈值", item)
-        if item.real.CDyer_DewPoint >= item.conclusion.DewPoint or \
-                item.real.CDyer_DewPoint >= thresh_dew:
+        time_log(f"debug-{item.equip_code}-dew:{real_dew},con:{heat_dew},thresh:{thresh_dew}")
+        if real_dew >= heat_dew or real_dew >= thresh_dew:
             # Regeneration_Control
             item.conclusion.Regeneration_Control = 1
             self.conclusion_update_control(item.conclusion)
